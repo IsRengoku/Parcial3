@@ -17,7 +17,7 @@ namespace Parcial3.Controllers
     {
         [HttpPost]
         [Route("Ingresar")]
-        public IQueryable<LoginRespuesta> Ingresar(Login login)
+        public IQueryable<LoginRespuesta> Ingresar([FromBody] Login login)
         {
             clsLogin _Login = new clsLogin();
             _Login.login = login;

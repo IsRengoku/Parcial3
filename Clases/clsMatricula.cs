@@ -10,7 +10,7 @@ namespace Parcial3.Clases
 {
         public class clsMatricula
     {
-        private DBExamenEntities1 dbExamen = new DBExamenEntities1();
+        private DBExamenEntities2 dbExamen = new DBExamenEntities2();
 
         private Matricula matricula { get; set; }
 

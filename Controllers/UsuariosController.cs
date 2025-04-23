@@ -14,7 +14,7 @@ namespace Parcial3.Controllers
     {
         [HttpPost]
         [Route("CrearUsuario")]
-        [Authorize]
+        [AllowAnonymous]
         public string CrearUsuario([FromBody] Usuario usuario, int idPerfil)
         {
             clsUsuario _usuario = new clsUsuario();

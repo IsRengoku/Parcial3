@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBExamenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBExamenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Estudiante">
           <Key>
             <PropertyRef Name="idEstudiante" />
@@ -43,8 +43,8 @@
           <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idEstudiante" Type="int" Nullable="false" />
           <Property Name="userName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Salt" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="256" />
+          <Property Name="Salt" Type="varchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Usuario_Perfil">
           <Key>
@@ -142,8 +142,7 @@
             <End Role="Usuario_Perfil" EntitySet="Usuario_Perfil" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBExamenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -189,10 +188,10 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idEstudiante" Type="Int32" Nullable="false" />
           <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Salt" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estudiante" Relationship="Self.FK_Usuario_Estudiante" FromRole="Usuario" ToRole="Estudiante" />
-          <NavigationProperty Name="Usuario_Perfil1" Relationship="Self.FK_Usuario_Perfil_Usuario" FromRole="Usuario" ToRole="Usuario_Perfil" />
+          <NavigationProperty Name="Usuario_Perfil" Relationship="Self.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Usuario_Perfil" />
         </EntityType>
         <EntityType Name="Usuario_Perfil">
           <Key>
@@ -203,7 +202,7 @@
           <Property Name="idPerfil" Type="Int32" Nullable="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Perfil" Relationship="Self.FK_Usuario_Perfil_Perfil" FromRole="Usuario_Perfil" ToRole="Perfil" />
-          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Usuario_Perfil_Usuario" FromRole="Usuario_Perfil" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Perfil" FromRole="Usuario_Perfil" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Matricula_Estudiante">
           <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
@@ -241,7 +240,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Perfil_Usuario">
+        <Association Name="FK_Usuario_Perfil">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Usuario_Perfil" Type="Self.Usuario_Perfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,7 +252,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBExamenEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBExamenEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Estudiantes" EntityType="Self.Estudiante" />
           <EntitySet Name="Matriculas" EntityType="Self.Matricula" />
           <EntitySet Name="Perfils" EntityType="Self.Perfil" />
@@ -271,7 +270,7 @@
             <End Role="Perfil" EntitySet="Perfils" />
             <End Role="Usuario_Perfil" EntitySet="Usuario_Perfil" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Perfil_Usuario" Association="Self.FK_Usuario_Perfil_Usuario">
+          <AssociationSet Name="FK_Usuario_Perfil" Association="Self.FK_Usuario_Perfil">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Usuario_Perfil" EntitySet="Usuario_Perfil" />
           </AssociationSet>
@@ -281,7 +280,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBExamenModelStoreContainer" CdmEntityContainer="DBExamenEntities1">
+        <EntityContainerMapping StorageEntityContainer="DBExamenModelStoreContainer" CdmEntityContainer="DBExamenEntities2">
           <EntitySetMapping Name="Estudiantes">
             <EntityTypeMapping TypeName="DBExamenModel.Estudiante">
               <MappingFragment StoreEntitySet="Estudiante">

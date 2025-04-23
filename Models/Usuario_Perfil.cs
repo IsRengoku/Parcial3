@@ -20,6 +20,6 @@ namespace Parcial3.Models
         public bool Activo { get; set; }
     
         public virtual Perfil Perfil { get; set; }
-        public virtual Usuario Usuario1 { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

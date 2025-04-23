@@ -12,7 +12,7 @@ namespace Parcial3.Clases
         {
             loginRespuesta = new LoginRespuesta();
         }
-        public DBExamenEntities1 dbExamen = new DBExamenEntities1();
+        public DBExamenEntities2 dbExamen = new DBExamenEntities2();
         public Login login { get; set; }
         public LoginRespuesta loginRespuesta { get; set; }
         private bool ValidarUsuario()

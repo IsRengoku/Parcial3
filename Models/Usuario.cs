@@ -11,14 +11,13 @@ namespace Parcial3.Models
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
     
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Usuario_Perfil1 = new HashSet<Usuario_Perfil>();
+            this.Usuario_Perfil = new HashSet<Usuario_Perfil>();
         }
     
         public int idUsuario { get; set; }
@@ -26,10 +25,9 @@ namespace Parcial3.Models
         public string userName { get; set; }
         public string Clave { get; set; }
         public string Salt { get; set; }
-
+    
         public virtual Estudiante Estudiante { get; set; }
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario_Perfil> Usuario_Perfil1 { get; set; }
+        public virtual ICollection<Usuario_Perfil> Usuario_Perfil { get; set; }
     }
 }

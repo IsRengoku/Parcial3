@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e7d2910b28d44560aae78522523d7df2" Name="Diagram1">
+      <Diagram DiagramId="1d6afba3beee44a78d511972e718eec7" Name="Diagram1">
         <EntityTypeShape EntityType="DBExamenModel.Estudiante" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="DBExamenModel.Matricula" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBExamenModel.Perfil" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
@@ -13,7 +13,7 @@
         <AssociationConnector Association="DBExamenModel.FK_Matricula_Estudiante" ManuallyRouted="false" />
         <AssociationConnector Association="DBExamenModel.FK_Usuario_Estudiante" ManuallyRouted="false" />
         <AssociationConnector Association="DBExamenModel.FK_Usuario_Perfil_Perfil" ManuallyRouted="false" />
-        <AssociationConnector Association="DBExamenModel.FK_Usuario_Perfil_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="DBExamenModel.FK_Usuario_Perfil" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

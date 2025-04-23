@@ -13,10 +13,10 @@ namespace Parcial3.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBExamenEntities1 : DbContext
+    public partial class DBExamenEntities2 : DbContext
     {
-        public DBExamenEntities1()
-            : base("name=DBExamenEntities1")
+        public DBExamenEntities2()
+            : base("name=DBExamenEntities2")
         {
         }
     

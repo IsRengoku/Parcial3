@@ -11,6 +11,7 @@ namespace Parcial3
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -20,12 +21,6 @@ namespace Parcial3
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            // Web API configuration and services
-            config.MessageHandlers.Add(new TokenValidationHandler());
-
-            // Web API routes
-            config.MapHttpAttributeRoutes();
         }
     }
 }
