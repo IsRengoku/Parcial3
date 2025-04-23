@@ -19,6 +19,7 @@ namespace Parcial3.Clases
         {
             try
             {
+                nuevaMatricula.TotalMatricula = nuevaMatricula.NumeroCreditos * nuevaMatricula.ValorCredito;
                 dbExamen.Matriculas.Add(nuevaMatricula);
                 dbExamen.SaveChanges();
                 return "Se ingresó la matricula la base de datos";
@@ -28,10 +29,16 @@ namespace Parcial3.Clases
                 return ex.Message;
             }
         }
-
-        public Matricula Consultar(string documento, string semestre)
+        public List<Matricula> ConsultarXSemestre(string semestre)
         {
-            Matricula mat= dbExamen.Matriculas.FirstOrDefault(m => m.Estudiante.Documento == documento && m.SemestreMatricula == semestre);
+            return dbExamen.Matriculas
+                .Where(m => m.SemestreMatricula == semestre)
+                .OrderBy(m => m.Estudiante.NombreCompleto)
+                .ToList();
+        }
+        public Matricula Consultar(int idEstudiante)
+        {
+            Matricula mat = dbExamen.Matriculas.FirstOrDefault(p => p.idEstudiante == idEstudiante);
             return mat;
         }
         public List<Matricula> ConsultarTodos()
@@ -41,16 +48,16 @@ namespace Parcial3.Clases
                 .ToList();
         }
 
-        public string Actualizar(string documento, string semestre, Matricula matricula)
+        public string Actualizar(int idEstudiante, Matricula matricula)
         {
             try
             {
-                Matricula mat = Consultar(documento, semestre);
+                Matricula mat = Consultar(idEstudiante);
                 if (mat == null)
                 {
                     return "No se encontró la matricula a eliminar";
                 }
-                mat.TotalMatricula = matricula.TotalMatricula;
+                mat.TotalMatricula = matricula.NumeroCreditos * matricula.ValorCredito;
                 mat.FechaMatricula = matricula.FechaMatricula;
                 mat.MateriasMatriculadas = matricula.MateriasMatriculadas;
                 mat.SemestreMatricula = matricula.SemestreMatricula;
@@ -66,12 +73,16 @@ namespace Parcial3.Clases
             }
         }
 
-        public string Eliminar(string documento, string semestre)
+        public string Eliminar(int idEstudiante)
         {
             try
             {
-                Matricula mat = Consultar(documento, semestre);
-                dbExamen.Matriculas.Remove(mat);
+                Matricula prod = Consultar(idEstudiante);
+                if (prod == null)
+                {
+                    return "El producto no existe";
+                }
+                dbExamen.Matriculas.Remove(prod);
                 dbExamen.SaveChanges();
                 return "Se eliminó la matricula correctamente";
             }

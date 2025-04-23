@@ -23,10 +23,16 @@ namespace Parcial3.Controllers
         }
 
         [HttpGet]
-        [Route("Consultar")]
-        public Matricula Consultar(string documento, string semestre)
+        [Route("ConsultarXId")]
+        public Matricula ConsultarXId(int idEstudiante)
         {
-            return matricula.Consultar(documento, semestre);
+            return matricula.Consultar(idEstudiante);
+        }
+        [HttpGet]
+        [Route("ConsultarXSemestre")]
+        public List<Matricula> ConsultarXSemestre(string semestre)
+        {
+            return matricula.ConsultarXSemestre(semestre);
         }
 
         [HttpGet]
@@ -38,17 +44,17 @@ namespace Parcial3.Controllers
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(string documento,string semestre, [FromBody] Matricula _matricula)
+        public string Actualizar(int idEstudiante, [FromBody] Matricula _matricula)
         {
-            return matricula.Actualizar(documento, semestre, _matricula);
+            return matricula.Actualizar(idEstudiante, _matricula);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(string documento, string semestre)
+        public string Eliminar(int idEstudiante)
         {
-            return matricula.Eliminar(documento, semestre);
+            return matricula.Eliminar(idEstudiante);
         }
     }
 }
