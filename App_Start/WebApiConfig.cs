@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Parcial3.Clases;
 
 namespace Parcial3
 {
@@ -19,6 +20,12 @@ namespace Parcial3
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Web API configuration and services
+            config.MessageHandlers.Add(new TokenValidationHandler());
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
         }
     }
 }
